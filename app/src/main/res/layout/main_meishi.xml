@@ -3,12 +3,12 @@
     android:layout_width="match_parent" android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/主页美食布局"
+        android:id="@+id/textview_meishi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="45dp"
         android:layout_marginTop="32dp"
-        android:text="TextView" />
+        android:text="主页美食布局" />
 </RelativeLayout>

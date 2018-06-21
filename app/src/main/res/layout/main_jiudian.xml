@@ -3,12 +3,12 @@
     android:layout_width="match_parent" android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/酒店视图"
+        android:id="@+id/jiudian"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
         android:layout_marginEnd="128dp"
         android:layout_marginTop="123dp"
-        android:text="TextView" />
+        android:text="酒店" />
 </RelativeLayout>
