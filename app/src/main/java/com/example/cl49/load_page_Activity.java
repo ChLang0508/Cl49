@@ -9,6 +9,10 @@ import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.ImageView;
+/***************
+ * author：成浪*
+ *    主页面   *
+ ***************/
 
 public class load_page_Activity extends AppCompatActivity {
     ImageView load_image=null;
@@ -24,10 +28,11 @@ public class load_page_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_load_page_);
 
         load_image=findViewById(R.id.imageView);
-
+        //设置过渡动画
         AlphaAnimation animation=new AlphaAnimation(0.1f,1.0f);
         animation.setDuration(3000);
         load_image.setAnimation(animation);
+        //设置动画播放监听
         animation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
