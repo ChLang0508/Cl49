@@ -10,8 +10,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-    }
 
+
+    }
+    //返回键监听重写
     @Override
     public void onBackPressed() {
         if ((System.currentTimeMillis()-clinkTime)<2000) {
