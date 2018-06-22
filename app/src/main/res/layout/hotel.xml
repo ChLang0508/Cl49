@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:id="@+id/R11">
+    android:id="@+id/r_hotel_1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
 
     <RelativeLayout
-        android:id="@+id/R22"
+        android:id="@+id/r_hotel_2"
         android:layout_width="match_parent"
         android:layout_height="200dp">
 
         <com.daimajia.slider.library.SliderLayout
-            android:id="@+id/slider"
+            android:id="@+id/hotel_slider"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             custom:auto_cycle="true"
@@ -20,7 +21,7 @@
             custom:pager_animation_span="1100" />
 
         <com.daimajia.slider.library.Indicators.PagerIndicator
-            android:id="@+id/jingdian_indicator2"
+            android:id="@+id/hotel_indicator2"
             style="@style/AndroidImageSlider_Corner_Oval_Orange"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
@@ -28,7 +29,7 @@
     </RelativeLayout>
 
     <ListView
-        android:id="@+id/jingdian_list"
+        android:id="@+id/hotel_list"
         android:layout_width="match_parent"
         android:layout_height="368dp"
         android:layout_alignParentStart="true"
