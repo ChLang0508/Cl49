@@ -53,12 +53,12 @@ public  class MainActivity extends AppCompatActivity{
         hotelMaps.put("5", R.drawable.indicator_corner_bg);
         hotelMaps.put("6", R.drawable.indicator_corner_bg);
 
-        LayoutInflater in1 = LayoutInflater.from(this);
-        in1.inflate(R.layout.activity_jingdian, fram1, true);
+       // LayoutInflater in1 = LayoutInflater.from(this);
+        //in1.inflate(R.layout.activity_jingdian, fram1, true);
        sider s1=new sider(MainActivity.this,mDemoSlider,urlMaps);
        s1.set_sider();
 
-        in1.inflate(R.layout.hotel,fram1,true);
+      //  in1.inflate(R.layout.hotel,fram1,true);
        sider s_hotel=new sider(MainActivity.this,hotel_sider,hotelMaps);
        s_hotel.set_sider();
 
