@@ -49,7 +49,7 @@ public  class MainActivity extends AppCompatActivity{
         urlMaps.put("3", R.drawable.indicator_corner_bg);
 
         HashMap<String, Integer> hotelMaps = new HashMap<>();
-        hotelMaps.put("4", R.drawable.timg1);
+        hotelMaps.put("4", R.drawable.home);
         hotelMaps.put("5", R.drawable.indicator_corner_bg);
         hotelMaps.put("6", R.drawable.indicator_corner_bg);
 
@@ -66,11 +66,11 @@ public  class MainActivity extends AppCompatActivity{
 
         /** 添加导航按钮 */
         HashMap<String,Integer> bottmap = new HashMap<>();
-        bottmap.put("主页",R.drawable.indicator_corner_bg);
-        bottmap.put( "景点",R.drawable.indicator_corner_bg);
-        bottmap.put( "美食",R.drawable.indicator_corner_bg);
-        bottmap.put( "酒店",R.drawable.indicator_corner_bg);
-        bottmap.put( "个人",R.drawable.indicator_corner_bg);
+        bottmap.put("主页",R.drawable.all);
+        bottmap.put( "景点",R.drawable.spot);
+        bottmap.put( "美食",R.drawable.restaurant);
+        bottmap.put( "酒店",R.drawable.hotel);
+        bottmap.put( "个人",R.drawable.account);
         ArrayList<String> botmapname=new ArrayList<String>(){{add("主页");add("景点");add("美食");add("酒店");add("个人");}};
 
         bottomnavigationbar b1=new bottomnavigationbar(bottomNavigationBar,botmapname,bottmap,fram1,R1,r_hotel);

@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Window;
-import android.view.WindowAnimationFrameStats;
 import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -36,7 +35,7 @@ public class load_page_Activity extends AppCompatActivity {
         animation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
-                load_image.setBackgroundResource(R.drawable.timg1);
+                load_image.setBackgroundResource(R.drawable.page_a);
             }
 
             @Override

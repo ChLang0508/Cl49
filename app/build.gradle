@@ -31,4 +31,5 @@ dependencies {
     compile 'com.daimajia.slider:library:1.1.5@aar'
     compile 'com.ashokvarma.android:bottom-navigation-bar:2.0.2'
 
+    implementation 'com.google.android.gms:play-services-maps:11.6.2'
 }
