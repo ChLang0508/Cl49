@@ -18,7 +18,8 @@
             custom:auto_cycle="true"
             custom:indicator_visibility="visible"
             custom:pager_animation="Accordion"
-            custom:pager_animation_span="1100" />
+            custom:pager_animation_span="1100"
+            android:background="#ffffff"/>
 
         <com.daimajia.slider.library.Indicators.PagerIndicator
             android:id="@+id/hotel_indicator2"

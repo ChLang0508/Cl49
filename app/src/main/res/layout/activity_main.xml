@@ -14,8 +14,8 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="0dp">
 
-        <include layout="@layout/activity_jingdian"></include>
         <include layout="@layout/hotel"></include>
+        <include layout="@layout/activity_homepage"></include>
 
 
     </FrameLayout>

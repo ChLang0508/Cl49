@@ -17,15 +17,17 @@ public class bottomnavigationbar implements BottomNavigationBar.OnTabSelectedLis
     private static int lastSelectedPosition=0;
     private FrameLayout f1;
     private RelativeLayout r1;
+    private  RelativeLayout r2;
 
 
-    public bottomnavigationbar(BottomNavigationBar bottomNavigationBar, ArrayList<String> botmapname, HashMap<String, Integer> bottmap, FrameLayout f1, RelativeLayout r1){
+    public bottomnavigationbar(BottomNavigationBar bottomNavigationBar, ArrayList<String> botmapname, HashMap<String, Integer> bottmap, FrameLayout f1, RelativeLayout r1,RelativeLayout r2){
 
         this.bottomNavigationBar=bottomNavigationBar;
         this.botmapname=botmapname;
         this.bottmap=bottmap;
         this.f1=f1;
         this.r1=r1;
+        this.r2=r2;
     }
 
     public void set_bottomnavigationbar(){
@@ -67,9 +69,18 @@ public class bottomnavigationbar implements BottomNavigationBar.OnTabSelectedLis
     @Override
     public void onTabSelected(int position) {
         switch (position){
-            case 1:
+            case 0:
                 f1.bringChildToFront(r1);
                 f1.invalidate();
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                f1.bringChildToFront(r2);
+                break;
+            case 4:
                 break;
 
         }
