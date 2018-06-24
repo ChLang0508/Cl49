@@ -20,7 +20,8 @@ public class bottomnavigationbar implements BottomNavigationBar.OnTabSelectedLis
     private  RelativeLayout r2;
 
 
-    public bottomnavigationbar(BottomNavigationBar bottomNavigationBar, ArrayList<String> botmapname, HashMap<String, Integer> bottmap, FrameLayout f1, RelativeLayout r1,RelativeLayout r2){
+    public bottomnavigationbar(BottomNavigationBar bottomNavigationBar, ArrayList<String> botmapname, HashMap<String, Integer> bottmap,
+                               FrameLayout f1, RelativeLayout r1,RelativeLayout r2){
 
         this.bottomNavigationBar=bottomNavigationBar;
         this.botmapname=botmapname;
@@ -66,21 +67,21 @@ public class bottomnavigationbar implements BottomNavigationBar.OnTabSelectedLis
 
     }
 
+
     @Override
     public void onTabSelected(int position) {
-        switch (position){
-            case 0:
+        switch (botmapname.get(position)){
+            case "主页":
                 f1.bringChildToFront(r1);
                 f1.invalidate();
                 break;
-            case 1:
+            case "景点":
                 break;
-            case 2:
-                break;
-            case 3:
+            case "酒店":
                 f1.bringChildToFront(r2);
                 break;
-            case 4:
+            case "个人":
+
                 break;
 
         }

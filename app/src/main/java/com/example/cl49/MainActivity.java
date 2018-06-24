@@ -1,10 +1,13 @@
 package com.example.cl49;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
@@ -19,6 +22,7 @@ import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 
 
 import java.lang.reflect.Array;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -37,6 +41,15 @@ public  class MainActivity extends AppCompatActivity{
         fram1= findViewById(R.id.fram1);
         R1=findViewById(R.id.R11);
         r_hotel=findViewById(R.id.r_hotel_1);
+        ImageView shopimage=findViewById(R.id.shop_image);
+
+        shopimage.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(MainActivity.this,Shop_homepage_Activity.class);
+                startActivity(intent);
+            }
+        });
 
 
 
@@ -68,17 +81,12 @@ public  class MainActivity extends AppCompatActivity{
         HashMap<String,Integer> bottmap = new HashMap<>();
         bottmap.put("主页",R.drawable.all);
         bottmap.put( "景点",R.drawable.spot);
-        bottmap.put( "美食",R.drawable.restaurant);
         bottmap.put( "酒店",R.drawable.hotel);
         bottmap.put( "个人",R.drawable.account);
-        ArrayList<String> botmapname=new ArrayList<String>(){{add("主页");add("景点");add("美食");add("酒店");add("个人");}};
+        ArrayList<String> botmapname=new ArrayList<String>(){{add("主页");add("景点");add("酒店");add("个人");}};
 
         bottomnavigationbar b1=new bottomnavigationbar(bottomNavigationBar,botmapname,bottmap,fram1,R1,r_hotel);
         b1.set_bottomnavigationbar();
-
-
-
-
 
     }
 
