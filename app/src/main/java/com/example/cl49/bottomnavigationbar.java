@@ -1,16 +1,18 @@
 package com.example.cl49;
 
+import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
-
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class bottomnavigationbar implements BottomNavigationBar.OnTabSelectedListener{
+
+public class bottomnavigationbar extends Activity implements BottomNavigationBar.OnTabSelectedListener{
     private BottomNavigationBar bottomNavigationBar;
     private ArrayList<String>botmapname;
     private HashMap<String, Integer> bottmap;
@@ -18,10 +20,20 @@ public class bottomnavigationbar implements BottomNavigationBar.OnTabSelectedLis
     private FrameLayout f1;
     private RelativeLayout r1;
     private  RelativeLayout r2;
+    private  RelativeLayout r3;
+    private RelativeLayout r4;
+    Context context;
 
 
-    public bottomnavigationbar(BottomNavigationBar bottomNavigationBar, ArrayList<String> botmapname, HashMap<String, Integer> bottmap,
-                               FrameLayout f1, RelativeLayout r1,RelativeLayout r2){
+    public bottomnavigationbar(Context context,
+                               BottomNavigationBar bottomNavigationBar,
+                               ArrayList<String> botmapname,
+                               HashMap<String, Integer> bottmap,
+                               FrameLayout f1,
+                               RelativeLayout r1,
+                               RelativeLayout r2,
+                               RelativeLayout r3,
+                               RelativeLayout r4){
 
         this.bottomNavigationBar=bottomNavigationBar;
         this.botmapname=botmapname;
@@ -29,6 +41,9 @@ public class bottomnavigationbar implements BottomNavigationBar.OnTabSelectedLis
         this.f1=f1;
         this.r1=r1;
         this.r2=r2;
+        this.r3=r3;
+        this.r4=r4;
+        this.context=context;
     }
 
     public void set_bottomnavigationbar(){
@@ -73,15 +88,18 @@ public class bottomnavigationbar implements BottomNavigationBar.OnTabSelectedLis
         switch (botmapname.get(position)){
             case "主页":
                 f1.bringChildToFront(r1);
+
                 f1.invalidate();
                 break;
             case "景点":
+                f1.bringChildToFront(r3);
                 break;
             case "酒店":
                 f1.bringChildToFront(r2);
                 break;
             case "个人":
-
+//                startActivity(new Intent(context.getApplicationContext(),Shop_homepage_Activity.class));
+                f1.bringChildToFront(r4);
                 break;
 
         }

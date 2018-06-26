@@ -47,7 +47,7 @@ public class sider {
     private BaseSliderView.OnSliderClickListener onSliderClickListener = new BaseSliderView.OnSliderClickListener() {
         @Override
         public void onSliderClick(BaseSliderView slider) {
-            Toast.makeText(context, "123", Toast.LENGTH_SHORT).show();
+
         }
     };
     //轮转事件监听
