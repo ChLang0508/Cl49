@@ -1,4 +1,4 @@
-package com.example.cl49;
+package com.example.cl49.com.massage;
 
 import android.content.Context;
 import android.util.Log;
@@ -10,7 +10,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 public class dbcopy {
-    Context context;
+    private Context context;
 
     public dbcopy(Context context){
         this.context=context;

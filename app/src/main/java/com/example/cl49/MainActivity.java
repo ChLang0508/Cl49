@@ -1,9 +1,12 @@
 package com.example.cl49;
 
+import com.example.cl49.com.massage.*;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -15,10 +18,23 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.daimajia.slider.library.SliderLayout;
+import com.example.cl49.com.massage.db;
+
+import org.ksoap2.SoapEnvelope;
+import org.ksoap2.SoapFault;
+import org.ksoap2.serialization.SoapObject;
+import org.ksoap2.serialization.SoapSerializationEnvelope;
+import org.ksoap2.transport.HttpResponseException;
+import org.ksoap2.transport.HttpTransportSE;
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public  class MainActivity extends AppCompatActivity{
+
+    //全局变量定义
     private long clinkTime = 0;
     private BottomNavigationBar bottomNavigationBar;
     private FrameLayout fram1;
@@ -29,13 +45,76 @@ public  class MainActivity extends AppCompatActivity{
     private int loginstate=0;
     private Button gr;
     private TextView textView;
+    public String namespace;
+    public String url;
+    public String modlename;
     private Context context;
+    SQLiteDatabase db;
+    int loginid;
+
+
+
+    public class WSAsyncTask extends AsyncTask {
+
+        SoapObject soapObject;
+
+        @Override
+        protected void onPreExecute() {
+
+            super.onPreExecute();
+        }
+
+
+        @Override
+        protected void onProgressUpdate(Object[] values) {
+            super.onProgressUpdate(values);
+        }
+
+        @Override
+        protected SoapObject doInBackground(Object... params) {
+            try {
+                SoapObject request = new SoapObject(namespace, modlename);
+
+                SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+                envelope.bodyOut = request;
+                envelope.dotNet = true;
+                HttpTransportSE httpTransportSE = new HttpTransportSE(url);
+
+                httpTransportSE.call(null, envelope);
+
+                soapObject = (SoapObject) envelope.getResponse();
+
+
+            } catch (HttpResponseException e) {
+                e.printStackTrace();
+            } catch (SoapFault soapFault) {
+                soapFault.printStackTrace();
+            } catch (XmlPullParserException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return soapObject;
+        }
+        @Override
+        protected void onPostExecute(Object o) {
+
+            super.onPostExecute(o);
+        }
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        //变量赋值定义
+
+        url="http://192.168.1.106/WebService2.asmx";
+        namespace=" http://tempuri.org/";
+        modlename="selectAllCargoInfor";
 
         fram1= findViewById(R.id.fram1);
         R1=findViewById(R.id.R11);
@@ -50,16 +129,16 @@ public  class MainActivity extends AppCompatActivity{
         Button el=findViewById(R.id.exitlogin);
         Button ea=findViewById(R.id.exitapp);
         textView=findViewById(R.id.persion_text);
-
-
         context=MainActivity.this;
         //context=getApplicationContext();
 
-
-
-//        Intent intent;
-//        intent=getIntent();
-//        loginstate=intent.getIntExtra("loginstat",0);
+        //复制数据库到目标文件夹
+        dbcopy dbcopy1=new dbcopy(context);
+        try {
+            dbcopy1.CopySqliteFileFromRawToDatabases("mydb.db");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         if(loginstate==0) {
             gr.setText("登录");
@@ -74,10 +153,10 @@ public  class MainActivity extends AppCompatActivity{
             public void onClick(View view) {
 
                 if(loginstate==0){
-                    startActivityForResult(new Intent(MainActivity.this,LoginActivity.class), 1);
+                    MainActivity.this.startActivityForResult(new Intent(MainActivity.this,LoginActivity.class), 1);
                 }
                 else {
-                    startActivity(new Intent(MainActivity.this,Per_massage_Activity.class));
+                    startActivity(new Intent(MainActivity.this,Per_massage_Activity.class).putExtra("id",loginid));
                 }
             }
         });
@@ -155,7 +234,7 @@ public  class MainActivity extends AppCompatActivity{
         bottmap.put( "个人",R.drawable.account);
         ArrayList<String> botmapname=new ArrayList<String>(){{add("主页");add("景点");add("酒店");add("个人");}};
 
-        bottomnavigationbar b1=new bottomnavigationbar(MainActivity.this,bottomNavigationBar,botmapname,bottmap,fram1,R1,r_hotel,spot,per);
+        bottomnavigationbar b1=new bottomnavigationbar(bottomNavigationBar,botmapname,bottmap,fram1,R1,r_hotel,spot,per);
         b1.set_bottomnavigationbar();
     }
 
@@ -177,12 +256,11 @@ public  class MainActivity extends AppCompatActivity{
             case 1:
                 if(resultCode==RESULT_OK) {
                     loginstate = data.getIntExtra("loginstate", 0);
+                    loginid=data.getIntExtra("id",0);
                     gr.setText("个人信息");
                     textView.setText("已登录");
                 }
                 break;
         }
     }
-
-
 }

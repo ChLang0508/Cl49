@@ -1,4 +1,4 @@
-package com.example.cl49;
+package com.example.cl49.com.massage;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

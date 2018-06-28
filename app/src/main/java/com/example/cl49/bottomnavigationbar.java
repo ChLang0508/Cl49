@@ -22,10 +22,10 @@ public class bottomnavigationbar extends Activity implements BottomNavigationBar
     private  RelativeLayout r2;
     private  RelativeLayout r3;
     private RelativeLayout r4;
-    Context context;
+    //Context context;
 
 
-    public bottomnavigationbar(Context context,
+    public bottomnavigationbar(//Context context,
                                BottomNavigationBar bottomNavigationBar,
                                ArrayList<String> botmapname,
                                HashMap<String, Integer> bottmap,
@@ -43,7 +43,7 @@ public class bottomnavigationbar extends Activity implements BottomNavigationBar
         this.r2=r2;
         this.r3=r3;
         this.r4=r4;
-        this.context=context;
+        //this.context=context;
     }
 
     public void set_bottomnavigationbar(){
@@ -98,7 +98,7 @@ public class bottomnavigationbar extends Activity implements BottomNavigationBar
                 f1.bringChildToFront(r2);
                 break;
             case "个人":
-//                startActivity(new Intent(context.getApplicationContext(),Shop_homepage_Activity.class));
+                //startActivity(new Intent(context.getApplicationContext(),Shop_homepage_Activity.class));
                 f1.bringChildToFront(r4);
                 break;
 
