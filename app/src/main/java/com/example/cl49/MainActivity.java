@@ -1,6 +1,5 @@
 package com.example.cl49;
 
-import com.example.cl49.com.massage.*;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -18,7 +17,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.daimajia.slider.library.SliderLayout;
-import com.example.cl49.com.massage.db;
 
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.SoapFault;
@@ -45,18 +43,22 @@ public  class MainActivity extends AppCompatActivity{
     private int loginstate=0;
     private Button gr;
     private TextView textView;
+    private TextView weatherview;
+    private Button wea_but;
     public String namespace;
     public String url;
     public String modlename;
     private Context context;
-    SQLiteDatabase db;
-    int loginid;
+    private SQLiteDatabase db;
+    private int loginid;
+
 
 
 
     public class WSAsyncTask extends AsyncTask {
 
         SoapObject soapObject;
+        String[]weather=new String[23];
 
         @Override
         protected void onPreExecute() {
@@ -71,19 +73,23 @@ public  class MainActivity extends AppCompatActivity{
         }
 
         @Override
-        protected SoapObject doInBackground(Object... params) {
+        protected String[] doInBackground(Object... params) {
             try {
+
                 SoapObject request = new SoapObject(namespace, modlename);
+                request.addProperty("theCityName",58847);
 
                 SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
                 envelope.bodyOut = request;
                 envelope.dotNet = true;
                 HttpTransportSE httpTransportSE = new HttpTransportSE(url);
 
-                httpTransportSE.call(null, envelope);
+                httpTransportSE.call("http://WebXml.com.cn/getWeatherbyCityName", envelope);
 
                 soapObject = (SoapObject) envelope.getResponse();
-
+                for(int i=0;i<23;i++) {
+                    weather[i] = (String) soapObject.getProperty(i);
+                }
 
             } catch (HttpResponseException e) {
                 e.printStackTrace();
@@ -94,12 +100,15 @@ public  class MainActivity extends AppCompatActivity{
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            return soapObject;
+            return  weather;
         }
         @Override
         protected void onPostExecute(Object o) {
-
             super.onPostExecute(o);
+
+            weatherview.setText("城市："+weather[0]+weather[1]+"\n最后更新时间："+weather[4]
+                    +"\n气温："+weather[6]+weather[5]+"\n风力："+weather[7]+weather[12]+weather[13]);
+
         }
     }
 
@@ -112,9 +121,9 @@ public  class MainActivity extends AppCompatActivity{
 
         //变量赋值定义
 
-        url="http://192.168.1.106/WebService2.asmx";
-        namespace=" http://tempuri.org/";
-        modlename="selectAllCargoInfor";
+        url="http://www.webxml.com.cn/WebServices/WeatherWebService.asmx";
+        namespace="http://WebXml.com.cn/";
+        modlename="getWeatherbyCityName";
 
         fram1= findViewById(R.id.fram1);
         R1=findViewById(R.id.R11);
@@ -128,6 +137,8 @@ public  class MainActivity extends AppCompatActivity{
         Button xg=findViewById(R.id.xiugai);
         Button el=findViewById(R.id.exitlogin);
         Button ea=findViewById(R.id.exitapp);
+        wea_but=findViewById(R.id.weather_button);
+        weatherview=findViewById(R.id.weatherview);
         textView=findViewById(R.id.persion_text);
         context=MainActivity.this;
         //context=getApplicationContext();
@@ -148,6 +159,9 @@ public  class MainActivity extends AppCompatActivity{
             gr.setText("个人信息");
             textView.setText("已登录");
         }
+
+        //按钮监听
+
         gr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -204,6 +218,13 @@ public  class MainActivity extends AppCompatActivity{
             }
         });
 
+        wea_but.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new WSAsyncTask().execute();
+            }
+        });
+
 
         HashMap<String, Integer> urlMaps = new HashMap<>();
         urlMaps.put("1", R.drawable.home);
@@ -229,10 +250,10 @@ public  class MainActivity extends AppCompatActivity{
         /** 添加导航按钮 */
         HashMap<String,Integer> bottmap = new HashMap<>();
         bottmap.put("主页",R.drawable.all);
-        bottmap.put( "景点",R.drawable.spot);
+        bottmap.put( "天气",R.drawable.spot);
         bottmap.put( "酒店",R.drawable.hotel);
         bottmap.put( "个人",R.drawable.account);
-        ArrayList<String> botmapname=new ArrayList<String>(){{add("主页");add("景点");add("酒店");add("个人");}};
+        ArrayList<String> botmapname=new ArrayList<String>(){{add("主页");add("天气");add("酒店");add("个人");}};
 
         bottomnavigationbar b1=new bottomnavigationbar(bottomNavigationBar,botmapname,bottmap,fram1,R1,r_hotel,spot,per);
         b1.set_bottomnavigationbar();

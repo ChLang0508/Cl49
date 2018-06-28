@@ -91,7 +91,7 @@ public class bottomnavigationbar extends Activity implements BottomNavigationBar
 
                 f1.invalidate();
                 break;
-            case "景点":
+            case "天气":
                 f1.bringChildToFront(r3);
                 break;
             case "酒店":

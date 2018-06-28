@@ -1,4 +1,4 @@
-package com.example.cl49.com.massage;
+package com.example.cl49;
 
 import android.content.Context;
 import android.util.Log;
