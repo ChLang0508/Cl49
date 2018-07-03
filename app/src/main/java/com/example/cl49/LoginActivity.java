@@ -31,6 +31,8 @@ public class LoginActivity extends Activity{
    Button sign_in;
 //    SoapObject soapObject;
     SQLiteDatabase db;
+    int user_id;
+    String password = "";
 
 //    public class WSAsyncTask extends AsyncTask {
 //
@@ -106,36 +108,31 @@ public class LoginActivity extends Activity{
         sign_in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (id.length()==0||pass.length()==0)
-                    Toast.makeText(LoginActivity.this,"账户或密码不能为空",Toast.LENGTH_LONG).show();
+                if (id.length() == 0 || pass.length() == 0)
+                    Toast.makeText(LoginActivity.this, "账户或密码不能为空", Toast.LENGTH_LONG).show();
                 else {
                     Cursor c = db.rawQuery("select _id,user_pass from user_u where _id=?", new String[]{id.getText().toString()});
-                        while (c.moveToNext()) {
-                            int user_id;
-                            String password = "";
-                            user_id = c.getInt(c.getColumnIndex("_id"));
-                            if (String.valueOf(user_id).equals(id.getText().toString())) {
-                                password = c.getString(c.getColumnIndex("user_pass"));
-                                if (password.equals(pass.getText().toString())) {
-                                    Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_LONG).show();
-                                }
-                            }
-                            c.close();
-                           db.close();
-                        Intent intent = new Intent();
-                        intent.putExtra("loginstate", 1);
-                        intent.putExtra("id",user_id);
-                        setResult(RESULT_OK, intent);
-                        finish();
+                    while (c.moveToNext()) {
+                        user_id = c.getInt(c.getColumnIndex("_id"));
+                        password = c.getString(c.getColumnIndex("user_pass"));
                     }
-                    Toast.makeText(LoginActivity.this,"账户名或密码错误",Toast.LENGTH_LONG).show();
+                    if (String.valueOf(user_id).equals(id.getText().toString())) {
+                        if (password.equals(pass.getText().toString())) {
+                            Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent();
+                            intent.putExtra("loginstate", 1);
+                            intent.putExtra("id", user_id);
+                            setResult(RESULT_OK, intent);
+                            finish();
+                            c.close();
+                            db.close();
+                        }else {
+                            Toast.makeText(LoginActivity.this, "用户名或密码错误", Toast.LENGTH_LONG).show();
+                        }
+                    }
                 }
-
             }
         });
-
-
-
     }
 }
 

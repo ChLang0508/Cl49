@@ -72,5 +72,4 @@ public class Sign_in_Activity extends AppCompatActivity {
             }
         });
     }
-
 }
